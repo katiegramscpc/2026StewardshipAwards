@@ -1,21 +1,19 @@
-export as*nc functi*n*GET(reque*t)*{
-  try {*    const*response * await fe*ch*
-      "h*tps*//central*arkny*.offices*acesoftwa*e.com/api*d*rectory_s*arch",
-  *  *{
-       *headers:*{
-       *  "User*Agent": "*ozilla*5.0*
-        *
-     *}
+export default async function handler(req, res) {
+  try {
+    const response = await fetch(
+      "https://centralparknyc.officespacesoftware.com/api/directory_search",
+      {
+        headers: {
+          "User-Agent": "Mozilla/5.0",
+          "Accept": "application/json"
+        }
+      }
     );
-*   *const tex* = await*response.*ext();
 
- *  return *ew Respon*e(text, {*      sta*us: 200,
-*     head*rs: {
-   *    "Cont*nt-Type":*"text/pla*n*
-*     }
-  * });
+    const text = await response.text();
 
-  }*catch (er*or) {
-   *return*new Respo*se("Error*fetching *mployees"* {*status: 5*0*});
+    res.status(200).send(text);
+  } catch (error) {
+    res.status(500).send("Error fetching employees");
   }
-}**
+}
