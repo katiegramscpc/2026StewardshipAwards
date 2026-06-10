@@ -1,8 +1,22 @@
 {
-* "routes*: [
-    {*     *"src": "/*pi/(**)",
-    * "dest*: "/api/$*"
+  "builds": [
+    {
+      "src": "api/*.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "*.tsx",
+      "use": "@vercel/static-build"
     }
-* ]
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ]
 }
-``*
